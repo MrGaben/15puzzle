@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function () {
     let startTime;
     let intervalId;
 
-    // Function to create tiles
     function createTile(number) {
         const tile = document.createElement('div');
         tile.classList.add('tile');
@@ -22,16 +21,15 @@ document.addEventListener('DOMContentLoaded', function () {
         return tile;
     }
 
-    // Function to update stopwatch
     function updateStopwatch() {
         const currentTime = new Date().getTime();
         const elapsedTime = currentTime - startTime;
         const minutes = Math.floor(elapsedTime / (1000 * 60));
         const seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
-        stopwatch.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        div1.textContent = `Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     }
 
-    // Function to shuffle tiles
+
     function shuffleTiles() {
         for (let i = tiles.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -40,12 +38,10 @@ document.addEventListener('DOMContentLoaded', function () {
         renderTiles();
     }
 
-    // Function to check if the puzzle is solved
     function isSolved() {
         return tiles.every((tile, index) => tile.dataset.number == index + 1);
     }
 
-    // Function to handle tile movement
     function moveTile(tile) {
         const emptyTile = tiles.find(tile => tile.dataset.number == 16);
         const tileIndex = tiles.indexOf(tile);
@@ -62,16 +58,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Function to render tiles
     function renderTiles() {
         let movestoHtml = document.getElementById("moves");
         moves++;
-        movestoHtml.innerHTML = moves;
+        div2.innerHTML = "Moves: " + moves;
         container.innerHTML = '';
         tiles.forEach(tile => container.appendChild(tile));
     }
 
-    // Initialize tiles
+
     for (let i = 1; i <= 15; i++) {
         const tile = createTile(i);
         tiles.push(tile);
@@ -79,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const emptyTile = document.createElement('div');
     emptyTile.classList.add('tile');
     emptyTile.dataset.number = 16;
-    emptyTile.textContent = ''; // Make the empty tile blank
+    emptyTile.textContent = ''; 
     tiles.push(emptyTile);
 
     shuffleTiles();

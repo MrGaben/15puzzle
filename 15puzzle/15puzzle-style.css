@@ -17,9 +17,10 @@
 }
 
 #stopwatch {
+    display: inline-block;
     margin: auto;
     width: 200px; 
-    margin-top: 240px;
+    margin-top: 280px;
     font-size: 24px;
     margin-left: 38%;
     margin-right: 50%;
@@ -27,12 +28,40 @@
     border: 3px solid black;
     border-radius: 20px;
 }
-#movest{
+
+#moves{ 
+    display: inline-block;
+    margin: auto;
+    width: 200px; 
+    margin-top: 10px;
     font-size: 24px;
+    margin-left: 48%;
+    margin-right: 50%;
     text-align: center;
-    margin-right: 100000px;
-    margin-top: 240px;
+    border: 3px solid black;
+    border-radius: 20px;
+
 }
+
 #parent {
-    display: flex;
+    border: 1px ;
   }
+
+  #wrapper {
+    border: 1px  ;
+    margin-top: 300px;
+    margin-left: 44%;
+}
+#div1 {
+    display: inline-block;
+    border: 3px solid black;
+    border-radius: 20px;
+    font-size: 24px;
+    padding-right: 4%;
+}
+#div2 {
+    display: inline-block;
+    border: 1px  ;
+    padding-left: 1%;
+    font-size: 24px;
+}
