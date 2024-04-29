@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (isSolved()) {
                 clearInterval(intervalId);
                 alert('Gratulálok sikeresen megoldotta a 15 puzzle-t!');
+                
             }
         }
     }
