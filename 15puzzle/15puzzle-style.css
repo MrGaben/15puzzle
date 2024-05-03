@@ -1,6 +1,6 @@
 #puzzle-container {
     display: grid;
-    margin-top: 5px;
+    margin-top: 15px;
     margin-left: 38%;
     margin-right: 50%;
     align-content: center;
@@ -20,7 +20,9 @@
     transition: transform 0.3s ease;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     margin: 2px;
+    border-radius: 25px;
 }
+
 .tile:hover {
     background-color: rgb(223, 225, 227);
     opacity: 30%;
@@ -38,19 +40,19 @@
     text-align: center;
     border: 3px solid black;
     border-radius: 20px;
+
 }
 
 
-#parent {
-    border: 1px ;
-  }
-
   #wrapper {
     border: 1px  ;
-    margin-top: 12%;
+    display: inline-block;
     margin-left: 38%;
+    margin-right: 50%;
+    width: 370px;
+    margin-top: 150px;
     border: solid;
-    margin-right: 41%;
+    margin-right: 40%;
     padding: 10px;
     border-radius: 20px;
     border: 2px solid black;
