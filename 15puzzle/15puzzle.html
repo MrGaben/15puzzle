@@ -2,19 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>15 Puzzle Game</title>
     <link rel="stylesheet" href="15puzzle-style.css">
 </head>
 <body>
-
-    <div id="wrapper">
-        <p style="text-align: center; font-size: 30px; margin-top: 10px; margin-bottom: 40px; font-style: italic; font-weight: bold;">15 PUZZLE</p>
-        <div id="div1">Time: 00:00</div>
-        <div id="div2">Moves: 0</div>
+    <div id="container">
+        <div id="wrapper">
+            <p style="text-align: center; font-size: 30px; margin-top: 10px; margin-bottom: 40px; font-style: italic; font-weight: bold;">PUZZLE</p>
+            <div id="div1">Time: 00:00</div>
+            <div id="div2">Moves: 0</div>
+            <label class="file">
+                <input type="file" id="file" accept="image/*" aria-label="File browser">
+                <span class="file-custom"></span>
+            </label>
+            <div id="preview"></div>
+        </div>
+        <div id="puzzle-container"></div>
     </div>
-
-    <div id="puzzle-container"></div>
     <script src="15puzzle-index.js"></script>
 </body>
 </html>

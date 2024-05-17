@@ -2,24 +2,104 @@ document.addEventListener('DOMContentLoaded', function () {
     const container = document.getElementById('puzzle-container');
     const stopwatch = document.getElementById('stopwatch');
     const tiles = [];
+    let numbre = 1;
     let moves = -1;
     let startTime;
     let intervalId;
 
-    function createTile(number) {
+$("#file").on("change", function () {
+    var file = this.files[0];
+    if (!file) {
+        // No file selected, exit
+        return;
+    }
+
+    var filename = file.name,
+        $label = $(this).next(".file-custom"),
+        $preview = $("#preview"),
+        img = document.createElement("img"),
+        reader = new FileReader();
+
+    // Check if the file is an image
+    if (!file.type.startsWith("image/")) {
+        alert("Please select an image file.");
+        return;
+    }
+
+    img.file = file;
+    img.classList.add("img-responsive");
+    $preview.html(img);
+
+    reader.onload = function (e) {
+        img.src = e.target.result;
+    };
+
+    reader.onerror = function () {
+        alert("There was an error reading the file.");
+    };
+
+    reader.readAsDataURL(file);
+
+    $label.attr("data-label", filename).addClass("active");
+});
+
+
+    document.getElementById('file').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+    
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const image = new Image();
+            image.src = e.target.result;
+            image.onload = function() {
+                const { width, height } = this;
+    
+                const containerWidth = 400; // A puzzle-container szélessége
+                const containerHeight = 400; // A puzzle-container magassága
+    
+                const tileWidth = containerWidth / 4;
+                const tileHeight = containerHeight / 4;
+    
+                const backgroundImageUrl = `url(${image.src})`;
+    
+                tiles.forEach((tile, index) => {
+                    if (index !== 15) { // Csak az első 14 csempébe rakjuk be a képet
+                        const row = Math.floor(index / 4);
+                        const col = index % 4;
+                        tile.style.backgroundImage = backgroundImageUrl;
+                        tile.style.backgroundSize = `${containerWidth}px ${containerHeight}px`;
+                        tile.style.backgroundPosition = `-${col * tileWidth}px -${row * tileHeight}px`;
+                        tile.dataset.number = numbre
+                        numbre++
+                    } else {
+                        tile.dataset.number = '16'; // Az üres csempe egyedi azonosítója
+                    }
+                });
+    
+                shuffleTiles(); // Összekeverjük a csempéket
+            };
+        };
+        reader.readAsDataURL(file);
+    });
+    
+    function createTile(imageSrc, number) {
+        const tileContainer = document.createElement('div');
+        tileContainer.classList.add('tile');
         const tile = document.createElement('div');
-        tile.classList.add('tile');
-        tile.textContent = number;
-        tile.dataset.number = number;
-        tile.addEventListener('click', () => {
+        tile.classList.add('tile-image');
+        tile.style.backgroundImage = `url(${imageSrc})`;
+        tileContainer.appendChild(tile);
+        tileContainer.addEventListener('click', () => {
             if (!startTime) {
                 startTime = new Date().getTime();
                 intervalId = setInterval(updateStopwatch, 1000);
             }
-            moveTile(tile);
+            moveTile(tileContainer);
         });
-        return tile;
+        return tileContainer;
     }
+    
 
     function updateStopwatch() {
         const currentTime = new Date().getTime();
@@ -53,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
             renderTiles();
             if (isSolved()) {
                 clearInterval(intervalId);
-                alert('Gratulálok sikeresen megoldotta a 15 puzzle-t!');
+                alert('Gratulálok sikeresen megoldotta a puzzle-t!');
                 
             }
         }
@@ -74,9 +154,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     const emptyTile = document.createElement('div');
     emptyTile.classList.add('tile');
-    emptyTile.dataset.number = 16;
     emptyTile.textContent = ''; 
     tiles.push(emptyTile);
-
-    shuffleTiles();
 });
